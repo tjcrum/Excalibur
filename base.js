@@ -1,37 +1,116 @@
 var app = new PIXI.Application({ width: 800, height: 600, backgroundColor : 0x1099bb});
 document.body.appendChild(app.view);
 
-var circle = new PIXI.Graphics();
-circle.beginFill(0x5cafe2);
-circle.drawCircle(0,0,120);
-circle.x = 140;
-circle.y = 180;
-app.stage.addChild(circle);
+var dogList = [new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/org_uploads/2014/06/cute-dog.jpg'),
+		new PIXI.Sprite.fromImage('https://4.bp.blogspot.com/-tgliMtjM-UI/WTRbVrD7StI/AAAAAAABxLA/mK_hlUYvR_MFptr-woS_Ig2GOJ2DZvG2gCLcB/s1600/cute-dogs-180-02.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2017/03/hugging-dogs-new-puppy-trek-envy-zain-13.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2015/04/bulldog-puppy-cute-dog-photography-coverimage.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2015/09/pekingese-dog-hairstyles-kuma-22.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2016/05/dog-cat-friends-golden-retriever-forsberg-maxwell-fb.png'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2016/08/animals-yoga-poses-7-57bae3cec6ed9__605.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2015/07/puppy-born-2-legs-half-bulldog-twice-heart-bonsai-15.jpg'),
+		new PIXI.Sprite.fromImage('http://static.boredpanda.com/blog/wp-content/uploads/2014/06/cute-dog-pig-virginia-facebook.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2018/04/5ad0b971c47c5_qD7Lfvo__700.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2017/04/image-58e2c2255dc58__700.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2014/04/cute-animals-sleeping-stuffed-toys-41.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2015/07/sleeping-puppy-cover-image.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2018/05/pitbull-dog-party-denied-entry-blu-petsmart-texas-5af2a4f20d74b__700.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2015/02/cute-cats-sleeping-on-dogs-16__700.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2016/10/AlicjaZmysowska-1-3s-5817476d3c457__880.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2016/03/cute-puppy-day-photos-adorable-dogs-60__605.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2015/05/Close-and-Personal-Portraits-of-Cats-and-Dogs-Part-22__880.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2015/05/Close-and-Personal-Portraits-of-Cats-and-Dogs-Part-214__880.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2015/05/Close-and-Personal-Portraits-of-Cats-and-Dogs-Part-221__880.jpg'),
+		new PIXI.Sprite.fromImage('http://static.boredpanda.com/blog/wp-content/uploads/2014/08/cute-animals-twins-15.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2018/04/dog-breathing-problems-awareness-pinched-nostrils-cruffa-5ae189ab5a6f3__700.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/org_uploads/2014/07/none1555__700.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2014/08/cute-dogs-hugging-humans-84.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2016/02/dog-hairstyles-instagram-kuma-moem-n-133__605.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2014/04/cute-animals-sleeping-stuffed-toys-17.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2016/01/dog-shiba-inu-sleeps-teddy-bear-same-position-maru-29.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2017/11/My-most-popular-pic-since-I-started-dog-photography-5a0b39c0ea507__880.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2014/03/first-world-anarchists-funny-rebels-7.jpg'),
+		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2015/05/funny-dog-animal-video-corgis-running-slow-motion-fb.jpg')];
 
-var dog1 = new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/org_uploads/2014/06/cute-dog.jpg');
-dog1.x = -20;
-dog1.y = -20;
-dog1.scale.x = .5;
-dog1.scale.y = .5;
-app.stage.addChild(dog1);
-dog1.mask = circle;
+var dogDisplay = dogList[0];
+dogDisplay.anchor.set(0.5);
+dogDisplay.x = app.screen.width / 2;
+dogDisplay.y = app.screen.height / 2;
+dogDisplay.scale.x = 1;
+dogDisplay.scale.y = 1;
+dogDisplay.alpha = .78;
+app.stage.addChild(dogDisplay);
 
-var circle = new PIXI.Graphics();
-circle.beginFill(0x5cafe2);
-circle.drawCircle(0,0,120);
-circle.x = 800 - 140;
-circle.y = 600 - 180;
-app.stage.addChild(circle);
+var style = new PIXI.TextStyle({
+    fontFamily: 'Arial',
+    fontSize: 42,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    fill: ['#ffffff', '#00ff99'], // gradient
+    stroke: '#4a1850',
+    strokeThickness: 5,
+    dropShadow: true,
+    dropShadowColor: '#000000',
+    dropShadowBlur: 4,
+    dropShadowAngle: Math.PI / 6,
+    dropShadowDistance: 6
+});
 
-var dog2 = new PIXI.Sprite.fromImage('https://4.bp.blogspot.com/-tgliMtjM-UI/WTRbVrD7StI/AAAAAAABxLA/mK_hlUYvR_MFptr-woS_Ig2GOJ2DZvG2gCLcB/s1600/cute-dogs-180-02.jpg');
-dog2.x = 800 - 420;
-dog2.y = 600 - 425;
-dog2.scale.x = .5;
-dog2.scale.y = .5;
-app.stage.addChild(dog2);
-dog2.mask = circle;
+var style2 = new PIXI.TextStyle({
+    fontFamily: 'Arial',
+    fontSize: 12,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    fill: ['#ffffff', '#00ff99'], // gradient
+    stroke: '#4a1850',
+    strokeThickness: 5,
+    dropShadow: true,
+    dropShadowColor: '#000000',
+    dropShadowBlur: 4,
+    dropShadowAngle: Math.PI / 6,
+    dropShadowDistance: 6
+});
 
-var text = new PIXI.Text('Hail Puppers!');
-text.x = 320;
-text.y = 180;
-app.stage.addChild(text);
+var titleText = new PIXI.Text('Hail Puppers!', style);
+titleText.anchor.set(0.5);
+titleText.x = app.screen.width / 2;
+titleText.y = app.screen.height / 2;
+app.stage.addChild(titleText);
+var count = 0;
+
+var timeText = new PIXI.Text(Date(), style2);
+timeText.anchor.set(0.0);
+timeText.x = 0;
+timeText.y = app.screen.height - 18;
+app.stage.addChild(timeText);
+
+var mask = new PIXI.Graphics();
+mask.drawCircle(0,0, app.screen.width);
+dogDisplay.mask = mask;
+
+var dogIndex = 0;
+
+app.ticker.add(function()
+{
+	timeText.text = Date();
+	count += 0.1;
+	titleText.rotation = Math.sin(count) / 2;
+	titleText.scale.x = Math.max(.75, Math.cos(count)) * 1.15;
+	titleText.scale.y = Math.max(.75, Math.cos(count)) * 1.15;
+
+	mask.clear();
+
+	var calc = Math.abs(Math.sin(count/9));
+	mask.drawCircle(0,0, app.screen.width * calc);
+
+	if(calc < .01)
+	{
+		if(dogIndex >= dogList.length)
+		{
+			dogIndex = 0;
+		}
+		
+		dogDisplay.texture = dogList[dogIndex].texture;
+		dogIndex++;
+	}
+});
