@@ -1,4 +1,4 @@
-var main = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor : 0x1099bb});
+var main = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor : 0x1099bb, forceCanvas: true});
 document.body.appendChild(main.view);
 main.stage.interactive = true;
 main.stage.on('pointerup', nextScreen);
