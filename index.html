@@ -1,48 +1,7 @@
-<!DOCTYPE html>
 <html>
-    <title> Hail Puppies </title>
-<head>
-    <script src="phaser.js"></script>
-</head>
+<title> Hail Puppers </title>
+<script src="pixi.js"></script>
 <body>
-<script>
-    var config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 300 },
-            debug: false
-        }
-        },
-        scene: {
-        preload: preload,
-        create: create,
-        update: update
-        }
-    };
-    
-    var game = new Phaser.Game(config);
-    
-    var currentTime;
-    var currentTimeText;
-
-    function preload ()
-    {
-        
-    }
-
-    function create ()
-    {
-        currentTimeText = this.add.text(16,16, 'Time:', { fontSize: '32px', fill: '#FFF'});
-    }
-    
-    function update()
-    {
-        currentTimeText.setText('Time: ' + new Date());
-    }
-</script>
+<script src="base.js"></script>
 </body>
 </html>
