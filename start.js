@@ -44,40 +44,10 @@ dogDisplay.scale.y = 1;
 dogDisplay.alpha = .78;
 main.stage.addChild(dogDisplay);
 
-var style = new PIXI.TextStyle({
-    fontFamily: 'Arial',
-    fontSize: 42,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-    fill: ['#ffffff', '#00ff99'], // gradient
-    stroke: '#4a1850',
-    strokeThickness: 5,
-    dropShadow: true,
-    dropShadowColor: '#000000',
-    dropShadowBlur: 4,
-    dropShadowAngle: Math.PI / 6,
-    dropShadowDistance: 6
-});
-
-var style2 = new PIXI.TextStyle({
-    fontFamily: 'Arial',
-    fontSize: 12,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-    fill: ['#ffffff', '#00ff99'], // gradient
-    stroke: '#4a1850',
-    strokeThickness: 5,
-    dropShadow: true,
-    dropShadowColor: '#000000',
-    dropShadowBlur: 4,
-    dropShadowAngle: Math.PI / 6,
-    dropShadowDistance: 6
-});
-
 var titleText = new PIXI.Text('Hail Puppers!', style);
 titleText.anchor.set(0.5);
 titleText.x = main.screen.width / 2;
-titleText.y = main.screen.height / 2;
+titleText.y = main.screen.height / 2 - 250;
 main.stage.addChild(titleText);
 var count = 0;
 
@@ -92,6 +62,10 @@ mask.drawCircle(0,0, main.screen.width);
 dogDisplay.mask = mask;
 
 var dogIndex = 0;
+
+var bgMusic = PIXI.sound.Sound.from('https://raw.githubusercontent.com/tjcrum/Excalibur/master/Gum-Ball-Factory.mp3');
+bgMusic.loop = true;
+bgMusic.play();
 
 main.ticker.add(function()
 {
