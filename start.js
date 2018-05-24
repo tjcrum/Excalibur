@@ -1,4 +1,4 @@
-var main = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor : 0x1099bb});
+var main = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor : 0x1099bb, forceCanvas: true});
 document.body.appendChild(main.view);
 
 var dogList = [new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/org_uploads/2014/06/cute-dog.jpg'),
