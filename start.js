@@ -1,8 +1,5 @@
-var main = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor : 0x1099bb, forceCanvas: true});
+var main = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor : 0x1099bb});
 document.body.appendChild(main.view);
-main.stage.interactive = true;
-main.stage.on('pointerup', nextScreen);
-main.stage.buttonMode = true;
 
 var dogList = [new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/org_uploads/2014/06/cute-dog.jpg'),
 		new PIXI.Sprite.fromImage('https://4.bp.blogspot.com/-tgliMtjM-UI/WTRbVrD7StI/AAAAAAABxLA/mK_hlUYvR_MFptr-woS_Ig2GOJ2DZvG2gCLcB/s1600/cute-dogs-180-02.jpg'),
@@ -49,7 +46,15 @@ titleText.anchor.set(0.5);
 titleText.x = main.screen.width / 2;
 titleText.y = main.screen.height / 2 - 250;
 main.stage.addChild(titleText);
-var count = 0;
+
+var startText = new PIXI.Text('Click here to start!', style3);
+startText.anchor.set(0.5);
+startText.x = main.screen.width / 2;
+startText.y = main.screen.height / 2 + 350;
+main.stage.addChild(startText);
+startText.interactive = true;
+startText.on('pointerup', nextScreen);
+startText.buttonMode = true;
 
 var timeText = new PIXI.Text(Date(), style2);
 timeText.anchor.set(0.0);
@@ -61,16 +66,18 @@ var mask = new PIXI.Graphics();
 mask.drawCircle(0,0, main.screen.width);
 dogDisplay.mask = mask;
 
-var dogIndex = 0;
+
 
 var bgMusic = PIXI.sound.Sound.from('https://raw.githubusercontent.com/tjcrum/Excalibur/master/Gum-Ball-Factory.mp3');
 bgMusic.loop = true;
 bgMusic.play();
 
-main.ticker.add(function()
+var count = 0;
+var dogIndex = 0;
+main.ticker.add(function(delta)
 {
 	timeText.text = Date();
-	count += 0.1;
+	count += 0.1 * delta;
 	titleText.rotation = Math.sin(count) / 2;
 	titleText.scale.x = Math.max(.75, Math.cos(count)) * 1.15;
 	titleText.scale.y = Math.max(.75, Math.cos(count)) * 1.15;
@@ -78,7 +85,7 @@ main.ticker.add(function()
 	mask.clear();
 
 	var calc = Math.abs(Math.sin(count/9));
-	mask.drawCircle(0,0, main.screen.width * calc);
+	mask.drawCircle(0,0, Math.max(main.screen.width, main.screen.height) * calc);
 
 	if(calc < .01)
 	{
