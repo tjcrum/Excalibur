@@ -1,6 +1,13 @@
 var main = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor : 0x1099bb, forceCanvas: true});
 document.body.appendChild(main.view);
 
+var bgContainer = new PIXI.Container();
+main.stage.addChild(bgContainer);
+
+var bg = new PIXI.Texture.fromImage('https://st2.depositphotos.com/1106005/8611/i/950/depositphotos_86118618-stock-photo-blue-and-white-wavy-stripes.jpg');
+var bgScroll = new PIXI.extras.TilingSprite(bg, main.screen.width, main.screen.height);
+bgContainer.addChild(bgScroll);
+
 var dogList = [new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/org_uploads/2014/06/cute-dog.jpg'),
 		new PIXI.Sprite.fromImage('https://4.bp.blogspot.com/-tgliMtjM-UI/WTRbVrD7StI/AAAAAAABxLA/mK_hlUYvR_MFptr-woS_Ig2GOJ2DZvG2gCLcB/s1600/cute-dogs-180-02.jpg'),
 		new PIXI.Sprite.fromImage('https://static.boredpanda.com/blog/wp-content/uploads/2017/03/hugging-dogs-new-puppy-trek-envy-zain-13.jpg'),
@@ -39,7 +46,7 @@ dogDisplay.y = main.screen.height / 2;
 dogDisplay.scale.x = 1;
 dogDisplay.scale.y = 1;
 dogDisplay.alpha = .78;
-main.stage.addChild(dogDisplay);
+bgContainer.addChild(dogDisplay);
 
 var titleText = new PIXI.Text('Hail Puppers!', style);
 titleText.anchor.set(0.5);
@@ -64,9 +71,7 @@ main.stage.addChild(timeText);
 
 var mask = new PIXI.Graphics();
 mask.drawCircle(0,0, main.screen.width);
-dogDisplay.mask = mask;
-
-
+bgContainer.mask = mask;
 
 var bgMusic = PIXI.sound.Sound.from('https://raw.githubusercontent.com/tjcrum/Excalibur/master/Gum-Ball-Factory.mp3');
 bgMusic.loop = true;
@@ -74,6 +79,7 @@ bgMusic.play();
 
 var count = 0;
 var dogIndex = 0;
+
 main.ticker.add(function(delta)
 {
 	timeText.text = Date();
@@ -97,6 +103,8 @@ main.ticker.add(function(delta)
 		dogDisplay.texture = dogList[dogIndex].texture;
 		dogIndex++;
 	}
+
+	bgScroll.tilePosition.x = count * 5;
 });
 
 function nextScreen()

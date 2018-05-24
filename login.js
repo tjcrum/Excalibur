@@ -1,4 +1,4 @@
-var login = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor : 0x1099bb});
+var login = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor : 0x1099bb, forceCanvas: true});
 
 var bgCircle = new PIXI.Graphics();
 bgCircle.beginFill(0x05323E);
@@ -6,9 +6,11 @@ bgCircle.drawCircle(0,0, login.screen.width / 2);
 login.stage.addChild(bgCircle);
 
 var bgCircle2 = new PIXI.Graphics();
-bgCircle.beginFill(0x1099bb);
-bgCircle.drawCircle(0,0, login.screen.width / 4);
-login.stage.addChild(bgCircle);
+bgCircle2.beginFill(0x1099bb);
+bgCircle2.drawCircle(0,0, login.screen.width / 2 - 10);
+var bgScroll2 = new PIXI.extras.TilingSprite(bg, main.screen.width, main.screen.height);
+bgScroll2.mask = bgCircle2;
+login.stage.addChild(bgScroll2);
 
 var usernameText = new PIXI.Text('Enter Username: ', style3);
 usernameText.anchor.set(1.0);
@@ -42,12 +44,21 @@ loginButton.x = login.screen.width / 2;
 loginButton.y = login.screen.height / 2 + 150;
 loginButton.interactive = true;
 loginButton.buttonMode = true;
-loginButton.on('click', attemptLogin);
+loginButton.on('pointerup', attemptLogin);
 login.stage.addChild(loginButton);
 
 function LoadLoginScreen()
 {
 	document.body.appendChild(login.view);
+
+	login.ticker.add(function(delta)
+	{
+		count += 0.1 * delta;
+		var calc = Math.abs(Math.sin(count/9));
+		bgScroll2.tilePosition.x = count * 5;
+		bgCircle2.clear();
+		bgCircle2.drawCircle(0,0, (Math.max(login.screen.width, login.screen.height) / 2 - 50) * calc);
+	});
 }
 
 function attemptLogin()
