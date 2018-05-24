@@ -4,7 +4,7 @@ document.body.appendChild(main.view);
 var bgContainer = new PIXI.Container();
 main.stage.addChild(bgContainer);
 
-var bg = new PIXI.Texture.fromImage('https://st2.depositphotos.com/1106005/8611/i/950/depositphotos_86118618-stock-photo-blue-and-white-wavy-stripes.jpg');
+var bg = new PIXI.Texture.fromImage('https://raw.githubusercontent.com/tjcrum/Excalibur/master/depositphotos_86118618-stock-photo-blue-and-white-wavy-stripes%5B1%5D.jpg');
 var bgScroll = new PIXI.extras.TilingSprite(bg, main.screen.width, main.screen.height);
 bgContainer.addChild(bgScroll);
 
